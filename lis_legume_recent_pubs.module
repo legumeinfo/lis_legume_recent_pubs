@@ -1,0 +1,54 @@
+<?php
+// $Id$
+
+//  Module: lis_legume_recent_pubs
+
+// Sudhansu Dash
+// 2016 Feb 29
+
+
+/**
+ * Implements hook_menu().
+ */
+
+function lis_legume_recent_pubs_menu() {
+  $items = array();
+  $items['publications/lis_legume_recent_pubs'] = array( //this creates a URL
+    'title' => 'Recent Legume Publications', //page title
+    'description' => 'List of recent legume publications from Pubmed via Eutils and JS http request.',
+    'page callback' => lis_legume_recent_pubs_page_callback, //this function called when page accessed. For form, use drupal_get_form
+    //'page arguments' => array('grin_acc_query_form'), //form name here // No need if page callback fn() doesn't need it.
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+
+function lis_legume_recent_pubs_theme() {
+  return array(
+    'lis_legume_recent_pubs_page_template' => array(  // this array name to be used in theme()
+    'template' => 'lis_legume_recent_pubs_page',  //,  template file lis_citations_page.tpl.php
+    //'variables' => array(),
+    ),  //array page_template
+  );  // array return
+}    
+
+/**
+ * Implements page callback.
+ */
+
+function lis_legume_recent_pubs_page_callback() {
+    
+    $genus = "Phaseolus";
+    $genera = ['Arachis', 'Phaseolus', 'Cicer'];
+    
+    $period = 3;
+    
+    
+    return theme ('lis_legume_recent_pubs_page_template', array('genus'=>$genus, 'period'=>$period)); 
+
+}

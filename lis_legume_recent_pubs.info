@@ -1,0 +1,10 @@
+name = lis_legume_recent_pubs
+description = List recent publications on legumes from Pubmed via Eutils and JS http requests.
+core = 7.x
+files[] = lis_legume_recent_pubs.module
+
+;package = 
+;dependencies[] = 
+;dependencies[] = 
+;files[] = 
+;configure = 
