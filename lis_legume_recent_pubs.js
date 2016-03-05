@@ -8,6 +8,14 @@ JS functions for the lis_legume_recent_pubs module
  *
  */
 
+/* TODO:
+ *Handle truncated list for display
+ *but try pubmed url with whole list (@Think about this)
+ *
+ */
+
+
+
 
 function makeHtmlFromEsummaryJson(esummaryJson) {  //NOT DONE YET winProgress
     //Given a jsonObj from eSummary, generates html <li> for display of Docsummary
@@ -49,10 +57,10 @@ function makeHtmlFromEsummaryJson(esummaryJson) {  //NOT DONE YET winProgress
         var source = esummaryResult[uid]['source']; //console.log(source);
         var volume = esummaryResult[uid]['volume']; //console.log(volume);
         
-        var linkToUid = "<a href=\"http://www.ncbi.nlm.nih.gov/pubmed/" + uid + "\"" + "  target=\"_blank\">" + uid + "</a>";
+        var linkToUid = "<a href=\"http://www.ncbi.nlm.nih.gov/pubmed/" + uid + "\"" + "  target=\"_blank\">" + title + "</a>";
         
-        var citation = (authors.join(", ") + ". " + "<b>" + year + "</b>" + ". " + title + " " + "<strong>" + source + " " + volume +  issue + ":" + pages + "</strong>" + "." + " (" + linkToUid + ")");
-        var citation_li = "<li>" + citation + "</li>"; // + "\n\n";
+        var citation = (authors.join(", ") + ". " + "<b>" + year + "</b>" + ". " + linkToUid + " " + "<strong>" + source + " " + volume +  issue + ":" + pages + "</strong>" + "." + " (" + uid + ")");
+        var citation_li = "<li>" + citation + "</li><br/>"; // + "\n\n";
         //Creates like:
         //Dash S, Campbell JD, Cannon EK, Cleary AM, ......, Farmer AD, Cannon SB. 2016. Legume information system (LegumeInfo.org): a key component of a set of federated data resources for the legume family. Nucleic Acids Res 44(D1):D1181-8. (<a href="http://www.ncbi.nlm.nih.gov/pubmed/26546515"  target="_blank">26546515</a>)
         //console.log("citation_li: " + citation_li); //debug
@@ -73,8 +81,13 @@ function makeHtmlFromEsummaryJson(esummaryJson) {  //NOT DONE YET winProgress
 
 function FillDomElementWithRecentPubsHtml (genus, period, domElementId) {
     
+    var message = "";
+    var messageInitial = "<span style='font-size:1.5em;color:#999999'>Please wait: Gettting data from Pubmed ...   ...   ...</span>";
+    //Show intial message
+    jQuery("#" + domElementId).html (messageInitial);
+    
     //Get the selected genus and periods from form
-    genus = jQuery("form#genus  input:checked").val()
+    genus = jQuery("form#genus  option:selected").val()
     period = jQuery("form#period  input:checked").val()   
     
     console.log("genus: " + genus); //debug
@@ -84,29 +97,53 @@ function FillDomElementWithRecentPubsHtml (genus, period, domElementId) {
     var htmlContent = "";
 
     //Construct Esearch URL
-    
-    //Example(works): http://www.ncbi.nlm.nih.gov/pubmed?term=Phaseolus+genetics+AND+%28%22last+12+months%22[PDat]%29&cmd=DetailsSearch
-    
+    //Obsolete Example(works): http://www.ncbi.nlm.nih.gov/pubmed?term=Phaseolus+genetics+AND+%28%22last+12+months%22[PDat]%29&cmd=DetailsSearch
     
     var BaseUrlEsearch = "http:" + "//eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?" + "db=Pubmed" + "&retmode=json" + "&" + "term=(";
     //var query = genus + "[MeSH+Terms]" + "+OR+" + genus + "[All+Fields]" + "+AND+" + "genetics" + "[MeSH+Terms]" +
                 "+AND+" + "(\"last+" + period + "+months\"[PDAT]))"; // + "&cmd=DetailsSearch" ;
-    var query = genus + "[Title/Abstract]" + "+AND+" + "\"last+" + period + "+months\"[PDat])" + "&retmax=10000"; // + "&cmd=DetailsSearch" ;
+    var query = genus + "[Title/Abstract]" + "+AND+" + "\"last+" + period + "+months\"[PDat])" + "&retmax=10000";
     var UrlEsearch = BaseUrlEsearch + query; //returns json obj
     console.log("UrlEsearch: " + UrlEsearch);
 
     
     //Get json from UrlEsearch
+    
+    //Http Request
     jQuery.get(UrlEsearch,status, function(esearchJson){
+    //jQuery.post(UrlEsearch,status, function(esearchJson){
         
         //pubmed id counts from Esearch
         var esearchCount = esearchJson.esearchresult.count;
+        
+        //Message while waiting 'No of items found'
+        message = "Found " + esearchCount + " items.  <br/>" + messageInitial;
+        jQuery("#" + domElementId).html (message);
         var esearchRetmax = esearchJson.esearchresult.retmax;
         console.log ("esearchCount: " + esearchCount + "; esearchRetmax: " + esearchRetmax); //debug
-        //pubmed id list from Esearch
         
+        //pubmed id list from Esearch
         var esearchIdlist = esearchJson.esearchresult.idlist;
         console.log ("esearchIdlist: " + esearchIdlist.join() ); //debug
+        
+        //Processing based on esearchIdlist is
+        switch (esearchIdlist != undefined) {
+            case esearchCount == 0:
+                message = "None Found at Pubmed<br/>";
+                jQuery("#" + domElementId).html (message);
+                return;
+            case esearchCount > 150:
+                message = "Found " + esearchCount + " items; but showing only 150.";
+                jQuery("#" + domElementId).html (message + " <br/> " + messageInitial);
+                esearchIdlistTrunc = esearchIdlist.slice(0, 150); //Truncated Idlist
+                esearchIdlist = esearchIdlistTrunc;  //Think about this
+                break;
+            default:
+                message = "Found " + esearchCount + " items.  <br/>" + messageInitial
+                jQuery("#" + domElementId).html (message);
+            } 
+        
+        
         
         //Pass Esearch Idlist to get Esummary
 //CAUTION:   If too many Ids, fails. "XMLHttpRequest cannot load ......    The response had HTTP status code 502. "         

@@ -3,7 +3,7 @@ description = List recent publications on legumes from Pubmed via Eutils and JS 
 core = 7.x
 files[] = lis_legume_recent_pubs.module
 
-;package = 
+package = LIS
 ;dependencies[] = 
 ;dependencies[] = 
 ;files[] = 
