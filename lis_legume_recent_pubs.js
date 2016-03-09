@@ -99,10 +99,12 @@ function FillDomElementWithRecentPubsHtml (genus, period, domElementId) {
     //Construct Esearch URL
     //Obsolete Example(works): http://www.ncbi.nlm.nih.gov/pubmed?term=Phaseolus+genetics+AND+%28%22last+12+months%22[PDat]%29&cmd=DetailsSearch
     
-    var BaseUrlEsearch = "http:" + "//eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?" + "db=Pubmed" + "&retmode=json" + "&" + "term=(";
+    var BaseUrlEsearch = "http:" + "//eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?" + "db=Pubmed" + "&retmode=json";
     //var query = genus + "[MeSH+Terms]" + "+OR+" + genus + "[All+Fields]" + "+AND+" + "genetics" + "[MeSH+Terms]" +
                 "+AND+" + "(\"last+" + period + "+months\"[PDAT]))"; // + "&cmd=DetailsSearch" ;
-    var query = genus + "[Title/Abstract]" + "+AND+" + "\"last+" + period + "+months\"[PDat])" + "&retmax=10000";
+    var query = "&" + "term=" + "(" + genus + "[Title/Abstract]" + "+AND+" 
+        + "\"last+" + period + "+months\"[PDat]" + ")"
+        + "&retmax=10000";
     var UrlEsearch = BaseUrlEsearch + query; //returns json obj
     console.log("UrlEsearch: " + UrlEsearch);
 

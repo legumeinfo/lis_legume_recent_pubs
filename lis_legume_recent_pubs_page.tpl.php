@@ -55,8 +55,8 @@
         <option value="Cicer">  Cicer  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
         <option value="Glycine">  Glycine  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
         <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Lens">  Lens  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Lotus">  Lotus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+        <option value="Lens culinaris">  Lens (culinaris) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+        <option value="Lotus japonicus">  Lotus (japonicus) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
         <option value="Lupinus">  Lupinus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
         <option value="Medicago">  Medicago  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
         <option value="Phaseolus" selected="selected">  Phaseolus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
