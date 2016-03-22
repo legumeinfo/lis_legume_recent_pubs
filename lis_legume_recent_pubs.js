@@ -127,17 +127,21 @@ function FillDomElementWithRecentPubsHtml (genus, period, domElementId) {
         //pubmed id list from Esearch
         var esearchIdlist = esearchJson.esearchresult.idlist;
         console.log ("esearchIdlist: " + esearchIdlist.join() ); //debug
+        esearchIdlist900Max = esearchIdlist.slice(0, 900);;  //Max limit Ids preserved for pubmedUrl (pubmed url limit)
         
         //Processing based on esearchIdlist is
+        var messageAddendum = '';
+        
         switch (esearchIdlist != undefined) {
             case esearchCount == 0:
                 message = "None Found at Pubmed<br/>";
                 jQuery("#" + domElementId).html (message);
                 return;
-            case esearchCount > 150:
-                message = "Found " + esearchCount + " items; but showing only 150.";
+            case esearchCount > 100:
+                message = "Found " + esearchCount + " items; but showing only 100.";
+                messageAddendum = " (showing only 100) ";
                 jQuery("#" + domElementId).html (message + " <br/> " + messageInitial);
-                esearchIdlistTrunc = esearchIdlist.slice(0, 150); //Truncated Idlist
+                esearchIdlistTrunc = esearchIdlist.slice(0, 100); //Truncated Idlist
                 esearchIdlist = esearchIdlistTrunc;  //Think about this
                 break;
             default:
@@ -145,7 +149,7 @@ function FillDomElementWithRecentPubsHtml (genus, period, domElementId) {
                 jQuery("#" + domElementId).html (message);
             } 
         
-        
+        //console.log("messageADDENDUM: " + messageAddendum);
         
         //Pass Esearch Idlist to get Esummary
 //CAUTION:   If too many Ids, fails. "XMLHttpRequest cannot load ......    The response had HTTP status code 502. "         
@@ -154,10 +158,10 @@ function FillDomElementWithRecentPubsHtml (genus, period, domElementId) {
         console.log("esummaryUrl: " + esummaryUrl); //debug
         jQuery.get(esummaryUrl,status, function(esummaryJson){
             
-            var pubmedUrl = "http://www.ncbi.nlm.nih.gov/pubmed/" + esearchIdlist.join();
+            var pubmedUrl = "http://www.ncbi.nlm.nih.gov/pubmed/" + esearchIdlist900Max.join();
             console.log("pubmedUrl: " + pubmedUrl);
             
-            message = "<span>" + "Found&nbsp;<b>" + esearchCount + "</b>&nbsp;publications for " 
+            message = "<span>" + "Found&nbsp;<b>" + esearchCount + "</b>" + messageAddendum + "&nbsp;publications for " 
                       + "<b>"+ genus + "</b> at Pubmed " + " published in the last <b>" + period + "</b> month(s):"
                       +"</span>";
             pubmedLink = " <a href=\"" + pubmedUrl + "\"  target=\"_blank\"> (Link to Pubmed) </a>";

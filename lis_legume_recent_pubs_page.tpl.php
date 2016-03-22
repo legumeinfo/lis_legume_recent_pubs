@@ -66,7 +66,7 @@
         <option value="Vicia">  Vicia  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
         <option value="Vigna">  Vigna  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
         <option value="legume">&nbsp;&nbsp;Legume  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-    </select>
+    </select>  <!-- mentioned in Title or Abstract -->
   </form>
 
 
@@ -79,7 +79,7 @@
     </form>
     </fieldset>
     
-<p style="font-size:70%">**Known issues: #Can't handle too many ids;  #No message on 0/zero or too many publications( stays quite); Gets non-genetics/clinical articles, etc.</p>
+<p style="font-size:70%">**Known issues: Shows non-genetics, clinical articles from Pubmed particularly for Glycine.</p>
 <span style="font-size: 80%;">(<i>Content created with up-to-date data from NCBI Pubmed database</i>)</span>
 </div>
 <hr/>
