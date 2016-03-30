@@ -44,8 +44,6 @@ function lis_legume_recent_pubs_theme() {
 function lis_legume_recent_pubs_page_callback() {
     
     $genus = "Phaseolus";
-    $genera = ['Arachis', 'Phaseolus', 'Cicer'];
-    
     $period = 3;
     
     

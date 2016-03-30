@@ -45,30 +45,30 @@
 <!--   Genus Dropdown  -->
 <div>
   <fieldset>
-  <form id="genus" action="">
-    <b>Genus:&nbsp;&nbsp;</b>  
-    <select  id="genus" onchange="FillDomElementWithRecentPubsHtml (this.options[this.selectedIndex].value, period, 'publications'); console.log('selected-option-value: ' + this.options[this.selectedIndex].value);">
-        <option value="Apios">  Apios  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Arachis">  Arachis  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Cajanus">  Cajanus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Chamaecrista">  Chamaecrista  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <option value="Cicer">  Cicer  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Glycine max">  Glycine (max) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Lens culinaris">  Lens (culinaris) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Lotus japonicus">  Lotus (japonicus) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Lupinus">  Lupinus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Medicago">  Medicago  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Phaseolus" selected="selected">  Phaseolus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Pisum">  Pisum  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </option>          
-        <option value="Trifolium">  Trifolium  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Vicia">  Vicia  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="Vigna">  Vigna  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-        <option value="legume">&nbsp;&nbsp;Legume  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-    </select>  <!-- mentioned in Title or Abstract -->
-  </form>
-
+    <form id="genus" action="">
+      <b>Genus:&nbsp;&nbsp;</b>  
+      <select  id="genus" onchange="FillDomElementWithRecentPubsHtml (this.options[this.selectedIndex].value, period, 'publications'); console.log('selected-option-value: ' + this.options[this.selectedIndex].value);">
+          <option value="Apios">  Apios  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Arachis">  Arachis  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Cajanus">  Cajanus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Chamaecrista">  Chamaecrista  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <option value="Cicer">  Cicer  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Glycine max">  Glycine (max) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <!-- <option value="Glycine">  Glycine &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option> -->
+          <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Lens culinaris">  Lens (culinaris) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Lotus japonicus">  Lotus (japonicus) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Lupinus">  Lupinus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Medicago">  Medicago  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Phaseolus" selected="selected">  Phaseolus  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Pisum">  Pisum  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </option>          
+          <option value="Trifolium">  Trifolium  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Vicia">  Vicia  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="Vigna">  Vigna  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+          <option value="legume">&nbsp;&nbsp;Legume  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+      </select>  <!-- mentioned in Title or Abstract -->
+    </form>
 
     <form id="period"  action="">
             <!--<legend>Period:</legend><br>-->
@@ -77,6 +77,12 @@
             <input type="radio" name="period" value="3"  checked="checked"  onclick="FillDomElementWithRecentPubsHtml (genus, this.value, 'publications');">&nbsp;&nbsp;Last 3 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="radio" name="period" value="6"  onclick="FillDomElementWithRecentPubsHtml (genus, this.value, 'publications');">&nbsp;&nbsp;Last 6 months
     </form>
+    
+    <form id="journal"  action="">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" name="journalSearch" checked="checked"   onclick="FillDomElementWithRecentPubsHtml (genus, period, 'publications');"> <b>Restrict to journals in Plant Sciences, Botany, Molecular Biology and Biotechnology at Pubmed</b>
+    </form>
+    
     </fieldset>
     
 <!--  <p style="font-size:70%">**Known issues: Shows non-genetics, clinical articles from Pubmed particularly for Glycine.</p>  -->
