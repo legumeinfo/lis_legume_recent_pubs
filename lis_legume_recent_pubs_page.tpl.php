@@ -80,8 +80,24 @@
     
     <form id="journal"  action="">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="checkbox" name="journalSearch" checked="checked"   onclick="FillDomElementWithRecentPubsHtml (genus, period, 'publications');"> <b>Restrict to journals in Plant Sciences, Botany, Molecular Biology and Biotechnology at Pubmed</b>
+        <input type="checkbox" name="journalSearch" checked="checked"   onclick="FillDomElementWithRecentPubsHtml (genus, period, 'publications');">
+        <b>Restrict to
+        <a id="collapseLink"  onclick="
+                  (function($) {
+                  $(document).ready(function(){
+                  $('fieldset#journalList').toggle('5000');
+                  /*$('#collapseLink').html('journals (Hide)');*/
+                  $('#collapseLink').text(($('#collapseLink').text() == 'journals (Hide)') ? 'journals' : 'journals (Hide)');
+                  }); /*document.ready*/
+                  })(jQuery); /*onclick*/
+        ">journals</a> in Plant Sciences, Botany, Molecular Biology and Biotechnology at Pubmed</b>
     </form>
+    
+        <!-- <<<<<<<<<<<<<< collapsible journal list<<<<<<<<<<<<<<<<<<< -->
+        <fieldset id="journalList"  style="display: none;background-color: #E2EADB;"> <!-- Collapsible fieldset -->
+        </fieldset>
+    
+        <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    -->
     
     </fieldset>
     

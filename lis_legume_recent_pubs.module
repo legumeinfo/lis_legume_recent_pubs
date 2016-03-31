@@ -20,6 +20,15 @@ function lis_legume_recent_pubs_menu() {
     //'page arguments' => array('grin_acc_query_form'), //form name here // No need if page callback fn() doesn't need it.
     'access callback' => TRUE,
   );
+  
+  /*$items['publications/lis_legume_recent_pubs_journal_list'] = array( //this creates a URL
+    'title' => 'Recent Legume Publications', //page title
+    'description' => 'List of recent legume publications from Pubmed via Eutils and JS http request.',
+    'page callback' => lis_legume_recent_pubs_page_callback, //this function called when page accessed. For form, use drupal_get_form
+    //'page arguments' => array('grin_acc_query_form'), //form name here // No need if page callback fn() doesn't need it.
+    'access callback' => TRUE,
+  ); */
+  
   return $items;
 }
 
@@ -32,6 +41,7 @@ function lis_legume_recent_pubs_theme() {
   return array(
     'lis_legume_recent_pubs_page_template' => array(  // this array name to be used in theme()
     'template' => 'lis_legume_recent_pubs_page',  //,  template file lis_citations_page.tpl.php
+    /*'template' => 'lis_legume_recent_pubs_journal_list_page'*/
     //'variables' => array(),
     ),  //array page_template
   );  // array return
@@ -46,7 +56,5 @@ function lis_legume_recent_pubs_page_callback() {
     $genus = "Phaseolus";
     $period = 3;
     
-    
     return theme ('lis_legume_recent_pubs_page_template', array('genus'=>$genus, 'period'=>$period)); 
-
 }
