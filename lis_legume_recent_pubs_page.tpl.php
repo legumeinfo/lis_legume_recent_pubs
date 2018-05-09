@@ -77,7 +77,11 @@
             <input type="radio" name="period" value="3"  checked="checked"  onclick="FillDomElementWithRecentPubsHtml (genus, this.value, 'publications');">&nbsp;&nbsp;Last 3 months&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="radio" name="period" value="6"  onclick="FillDomElementWithRecentPubsHtml (genus, this.value, 'publications');">&nbsp;&nbsp;Last 6 months
     </form>
-    
+
+<!--
+NOTE:  Adding journal list to URL makes it too long and fails (May 2018). Until a solution is found to include jounal list in URL, removing journal list option.
+-->
+<!--    
     <form id="journal"  action="">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="checkbox" name="journalSearch" checked="checked"   onclick="FillDomElementWithRecentPubsHtml (genus, period, 'publications');">
@@ -92,6 +96,7 @@
                   })(jQuery); /*onclick*/
         ">journals</a> in Plant Sciences, Botany, Molecular Biology and Biotechnology at Pubmed</b>
     </form>
+-->
     
         <!-- <<<<<<<<<<<<<< collapsible journal list<<<<<<<<<<<<<<<<<<< -->
         <fieldset id="journalList"  style="display: none;background-color: #E2EADB;"> <!-- Collapsible fieldset -->
